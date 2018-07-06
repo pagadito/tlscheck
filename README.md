@@ -9,6 +9,7 @@ Los comercios deben verificar que sus sistemas puedan usar el protocolo TLSv1.2 
 Utilice las siguientes herramientas para verificar la preparación de TLSv1.2 en su entorno:
 * [Acceso remoto SSH](#acceso-remoto-ssh)
 * [PHP](#php)
+* [PAGADITO POS PC](#pagadito-pos-pc)
 
 * * *
 ### Acceso Remoto SSH
@@ -23,31 +24,31 @@ Utilice las siguientes herramientas para verificar la preparación de TLSv1.2 en
 1. Ingrese a la consola SSH de su servidor
 2. Ejecute el siguiente comando
 
-```sh
-openssl s_client -connect sandbox.pagadito.com:443
-```
+    ```sh
+    openssl s_client -connect sandbox.pagadito.com:443
+    ```
 
-* Un resultado exitoso:
+    * Un resultado exitoso:
 
-```sh
-CONNECTED(00000003)
-...
-SSL-Session:
-    Protocol : TLSv1.2
-...
-```
+    ```sh
+    CONNECTED(00000003)
+    ...
+    SSL-Session:
+        Protocol : TLSv1.2
+    ...
+    ```
 
-* Un resultado fallido:
+    * Un resultado fallido:
 
-```sh
-CONNECTED(00000003)
-139788311062176:error:1409E0E5:SSL routines:SSL3_WRITE_BYTES:ssl handshake failure:s3_pkt.c:599:
-...
-Secure Renegotiation IS NOT supported
-SSL-Session:
-    Protocol  : TLSv1.1
+    ```sh
+    CONNECTED(00000003)
+    139788311062176:error:1409E0E5:SSL routines:SSL3_WRITE_BYTES:ssl handshake failure:s3_pkt.c:599:
+    ...
+    Secure Renegotiation IS NOT supported
+    SSL-Session:
+        Protocol  : TLSv1.1
 
-```
+    ```
 
 * * *
 
@@ -102,8 +103,36 @@ SSL-Session:
     TLS test(default ) :cURL Error! #35 : Unknown SSL protocol error in connection to sandbox.pagadito.com:443
     TLS test(TLSv1.2 forced) :cURL Error! #35 : Unknown SSL protocol error in connection to sandbox.pagadito.com:443
     ```
+* * *
+
+### PAGADITO POS PC
+* [Requerimientos POS](#requerimientos-pos)
+* [Lineamientos POS](#lineamientos-pos)
+
+#### Requerimientos POS
+* Herramienta PagaditoChecker [PAGADITO_POS_PC/CheckerPagadito.zip](PAGADITO_POS_PC/CheckerPagadito.zip)
+
+#### Lineamientos POS
+1. Descargue la herramienta desde aquí: [PAGADITO_POS_PC/CheckerPagadito.zip](PAGADITO_POS_PC/CheckerPagadito.zip)
+2. Descomprima el archivo CheckerPagadito.zip
+3. Abra el archivo ejecutable CheckerPagadito/CheckerPagadito.exe
+4. Haga clic en el botón PROBAR
+
+    * Un resultado exitoso mostrará el mensaje:
+
+    ```
+    Todo bien, cumple con los requisitos.
+    ```
+    *Captura de ejemplo:[PAGADITO_POS_PC/prueba_satisfactorio.png](PAGADITO_POS_PC/prueba_satisfactorio.png)*
+
+    * Un resultado fallido mostrará el mensaje:
+    ```
+    Contacte a soporte técnico
+    ```
+    *Captura de ejemplo:[PAGADITO_POS_PC/prueba_fallida.png](PAGADITO_POS_PC/prueba_fallida.png)*
 
 * * *
+
 ## ¿Qué debe hacer si obtuvo un resultado fallido?
 1. Asegúrese de utilizar las [últimas versiones de nuestras APIs, Plugins o Demos](https://dev.pagadito.com/index.php?mod=docs&hac=des)
 2. Realice transacciones de prueba en ambiente Sandbox (Este ambiente ya tiene aplicado el cambio de TLS y te dará error de conexión si tu sitio web se intenta comunicar con Pagadito mediante protocolos no soportados)
